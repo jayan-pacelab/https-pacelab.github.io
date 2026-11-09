@@ -1,1 +1,862 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Your Name | Computational Electrochemistry</title>
+
+  <style>
+
+    :root {
+      --navy: #081b2c;
+      --navy-light: #102f49;
+      --blue: #2b78b8;
+      --blue-light: #eaf4fb;
+      --accent: #56b7c8;
+      --text: #1e2933;
+      --muted: #667481;
+      --white: #ffffff;
+      --background: #f6f9fc;
+      --border: #dbe5ec;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* NAVIGATION */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 17px 7%;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links a {
+      margin-left: 25px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      color: #344452;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 82vh;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(86,183,200,0.18), transparent 28%),
+        linear-gradient(135deg, #071827, #102f49);
+      color: white;
+      padding: 95px 7%;
+    }
+
+    .hero-inner {
+      max-width: 1180px;
+      width: 100%;
+      margin: auto;
+    }
+
+    .eyebrow {
+      color: #85d6e3;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: 1.05;
+      margin: 0;
+      max-width: 900px;
+    }
+
+    .hero h2 {
+      margin-top: 22px;
+      font-size: 24px;
+      font-weight: 400;
+      color: #d4e7f3;
+      max-width: 850px;
+    }
+
+    .hero-description {
+      max-width: 760px;
+      font-size: 17px;
+      color: #c2d2df;
+      margin-top: 24px;
+    }
+
+    .hero-buttons {
+      margin-top: 34px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 23px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: 650;
+      transition: 0.25s;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--navy);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1px solid #8fb7ce;
+      color: white;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* MAIN */
+
+    .container {
+      max-width: 1180px;
+      margin: auto;
+      padding: 85px 25px;
+    }
+
+    .section-label {
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-size: 38px;
+      line-height: 1.25;
+      color: var(--navy);
+      margin: 7px 0 20px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 780px;
+      font-size: 17px;
+    }
+
+    /* FIGURE */
+
+    .research-figure {
+      margin-top: 35px;
+      min-height: 440px;
+      border-radius: 18px;
+      background:
+        linear-gradient(135deg, #eaf4fb, #f8fbfd);
+      border: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 45px;
+      box-shadow: 0 14px 40px rgba(8, 27, 44, 0.08);
+    }
+
+    .figure-placeholder h3 {
+      color: var(--navy);
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .figure-placeholder p {
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    /* ABOUT */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 55px;
+      align-items: center;
+    }
+
+    .about-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 25px rgba(8,27,44,0.05);
+    }
+
+    /* RESEARCH */
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      margin-top: 35px;
+    }
+
+    .research-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: 0.25s ease;
+      box-shadow: 0 10px 25px rgba(8,27,44,0.04);
+    }
+
+    .research-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 35px rgba(8,27,44,0.10);
+    }
+
+    .research-card h3 {
+      font-size: 25px;
+      color: var(--navy);
+      margin-top: 0;
+    }
+
+    .research-topics {
+      color: var(--blue);
+      font-weight: 650;
+      margin-bottom: 18px;
+    }
+
+    .research-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--blue);
+    }
+
+    /* EXPERTISE */
+
+    .expertise {
+      background: var(--navy);
+      color: white;
+    }
+
+    .expertise .section-title {
+      color: white;
+    }
+
+    .expertise .section-intro {
+      color: #b9cedb;
+    }
+
+    .skill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .skill {
+      padding: 11px 17px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      border-radius: 30px;
+      font-size: 14px;
+    }
+
+    /* HIGHLIGHTS */
+
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 35px;
+    }
+
+    .highlight-card {
+      background: white;
+      padding: 26px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+
+    .highlight-card h3 {
+      margin-top: 0;
+      color: var(--navy);
+    }
+
+    /* PUBLICATIONS */
+
+    .publication {
+      background: white;
+      border-left: 4px solid var(--blue);
+      padding: 22px 25px;
+      margin-top: 18px;
+      border-radius: 0 10px 10px 0;
+    }
+
+    .publication h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      color: var(--navy);
+    }
+
+    .publication p {
+      margin: 4px 0;
+      color: var(--muted);
+    }
+
+    /* CONTACT */
+
+    .contact-box {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      border-radius: 18px;
+      padding: 48px;
+      color: white;
+    }
+
+    .contact-box h2 {
+      margin-top: 0;
+      font-size: 34px;
+    }
+
+    .contact-links {
+      margin-top: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .contact-links a {
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 10px 16px;
+      border-radius: 7px;
+      text-decoration: none;
+    }
+
+    footer {
+      padding: 28px;
+      text-align: center;
+      color: #73818d;
+      font-size: 14px;
+    }
+
+    @media (max-width: 800px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .about-grid,
+      .research-grid,
+      .highlights {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 75px;
+      }
+
+      .section-title {
+        font-size: 31px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <nav>
+
+    <div class="logo">
+      YOUR NAME
+    </div>
+
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#publications">Publications</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+  </nav>
+
+
+  <header class="hero">
+
+    <div class="hero-inner">
+
+      <div class="eyebrow">
+        Computational Electrochemistry & Energy Materials
+      </div>
+
+      <h1>
+        Your Name
+      </h1>
+
+      <h2>
+        Understanding electrochemical interfaces from atoms to reaction kinetics.
+      </h2>
+
+      <p class="hero-description">
+        Computational researcher working at the intersection of electrocatalysis,
+        electrochemical energy conversion, and next-generation energy storage,
+        using first-principles simulations, kinetic modeling, and data-driven
+        materials discovery.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#research" class="btn btn-primary">
+          Explore Research
+        </a>
+
+        <a href="files/CV.pdf" class="btn btn-outline" target="_blank">
+          Download CV
+        </a>
+
+        <a href="#publications" class="btn btn-outline">
+          Publications
+        </a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- COMBINED RESEARCH FIGURE -->
+
+  <section>
+
+    <div class="container">
+
+      <div class="section-label">
+        Research Overview
+      </div>
+
+      <h2 class="section-title">
+        Connecting fundamental electrochemistry with materials design
+      </h2>
+
+      <p class="section-intro">
+        My research combines atomistic modeling, reaction kinetics, and
+        data-driven approaches to understand electrochemical processes
+        relevant to sustainable chemical conversion and advanced energy storage.
+      </p>
+
+      <div class="research-figure">
+
+        <div class="figure-placeholder">
+
+          <h3>
+            Combined Research Figure
+          </h3>
+
+          <p>
+            Place your graphical research overview here.
+            This can combine OER, CER, NO₃RR, CO₂ conversion,
+            Li–S, Na–S, Mg–CO₂ batteries, DFT, GC-DFT,
+            microkinetics, and machine learning.
+          </p>
+
+          <p>
+            Suggested image filename:
+            <strong>images/research-overview.png</strong>
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ABOUT -->
+
+  <section id="about">
+
+    <div class="container about-grid">
+
+      <div>
+
+        <div class="section-label">
+          About
+        </div>
+
+        <h2 class="section-title">
+          Computational approaches for electrochemical materials
+        </h2>
+
+        <p>
+          I am a computational researcher specializing in electrocatalysis,
+          electrochemical energy conversion, and next-generation energy storage.
+          My work combines density functional theory (DFT), grand-canonical DFT,
+          microkinetic modeling, electronic-structure analysis, and data-driven
+          approaches to understand reaction mechanisms at electrified interfaces.
+        </p>
+
+        <p>
+          My research spans oxygen and chlorine evolution, nitrate and CO₂
+          reduction, and advanced battery chemistries including Li–S,
+          Na–S, and metal–CO₂ systems.
+        </p>
+
+      </div>
+
+
+      <div class="about-card">
+
+        <h3>Current Position</h3>
+
+        <p>
+          Your Position<br>
+          Your Department<br>
+          Your Institution
+        </p>
+
+        <h3>Research Focus</h3>
+
+        <p>
+          Computational electrocatalysis, electrochemical interfaces,
+          reaction mechanisms, catalyst design, and next-generation batteries.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- RESEARCH -->
+
+  <section id="research">
+
+    <div class="container">
+
+      <div class="section-label">
+        Research
+      </div>
+
+      <h2 class="section-title">
+        Two interconnected research directions
+      </h2>
+
+      <div class="research-grid">
+
+
+        <article class="research-card">
+
+          <h3>
+            Energy Conversion
+          </h3>
+
+          <div class="research-topics">
+            OER • CER • NO₃RR • CO₂RR
+          </div>
+
+          <p>
+            I investigate electrochemical reaction mechanisms at electrified
+            interfaces, with emphasis on potential-dependent energetics,
+            surface coverage, catalytic activity, selectivity, and reaction kinetics.
+          </p>
+
+          <p>
+            These studies combine DFT, grand-canonical DFT,
+            computational hydrogen electrode models, electronic-structure
+            analysis, and microkinetic modeling.
+          </p>
+
+          <a href="energy-conversion.html" class="research-link">
+            Explore Energy Conversion →
+          </a>
+
+        </article>
+
+
+        <article class="research-card">
+
+          <h3>
+            Energy Storage
+          </h3>
+
+          <div class="research-topics">
+            Li–S • Na–S • Mg–CO₂ • Redox Mediators
+          </div>
+
+          <p>
+            I study next-generation batteries involving multistep conversion
+            reactions, focusing on electrode materials, molecular mediators,
+            catalytic interfaces, reaction reversibility, and discharge chemistry.
+          </p>
+
+          <p>
+            First-principles calculations and data-driven methods are used
+            to establish molecular-level design principles for advanced
+            energy-storage systems.
+          </p>
+
+          <a href="energy-storage.html" class="research-link">
+            Explore Energy Storage →
+          </a>
+
+        </article>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- EXPERTISE -->
+
+  <section id="expertise" class="expertise">
+
+    <div class="container">
+
+      <div class="section-label">
+        Methods & Expertise
+      </div>
+
+      <h2 class="section-title">
+        From electronic structure to predictive modeling
+      </h2>
+
+      <p class="section-intro">
+        My work integrates quantum-mechanical simulations, reaction kinetics,
+        and data-driven materials discovery.
+      </p>
+
+      <div class="skill-grid">
+
+        <span class="skill">Density Functional Theory</span>
+        <span class="skill">Grand-Canonical DFT</span>
+        <span class="skill">Computational Electrocatalysis</span>
+        <span class="skill">Microkinetic Modeling</span>
+        <span class="skill">Electronic Structure Analysis</span>
+        <span class="skill">Constant-Potential Modeling</span>
+        <span class="skill">Catalyst Screening</span>
+        <span class="skill">Machine Learning</span>
+        <span class="skill">Quantum Chemistry</span>
+        <span class="skill">Battery Interfaces</span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- HIGHLIGHTS -->
+
+  <section>
+
+    <div class="container">
+
+      <div class="section-label">
+        Research Highlights
+      </div>
+
+      <h2 class="section-title">
+        Selected scientific contributions
+      </h2>
+
+      <div class="highlights">
+
+        <div class="highlight-card">
+          <h3>Constant-Potential Modeling</h3>
+          <p>
+            Development and application of GC-DFT approaches for
+            electrochemical reaction mechanisms under controlled
+            electrode potentials.
+          </p>
+        </div>
+
+        <div class="highlight-card">
+          <h3>Reaction Kinetics</h3>
+          <p>
+            Integration of first-principles energetics with microkinetic
+            models and experimental observables including Tafel slopes.
+          </p>
+        </div>
+
+        <div class="highlight-card">
+          <h3>Materials Discovery</h3>
+          <p>
+            Combining DFT-derived descriptors and machine learning
+            to accelerate catalyst discovery for electrochemical
+            conversion and storage.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PUBLICATIONS -->
+
+  <section id="publications">
+
+    <div class="container">
+
+      <div class="section-label">
+        Publications
+      </div>
+
+      <h2 class="section-title">
+        Selected publications
+      </h2>
+
+      <div class="publication">
+        <h3>
+          Publication Title 1
+        </h3>
+        <p>
+          Authors, Journal, Year
+        </p>
+      </div>
+
+      <div class="publication">
+        <h3>
+          Publication Title 2
+        </h3>
+        <p>
+          Authors, Journal, Year
+        </p>
+      </div>
+
+      <div class="publication">
+        <h3>
+          Publication Title 3
+        </h3>
+        <p>
+          Authors, Journal, Year
+        </p>
+      </div>
+
+      <br>
+
+      <a class="btn btn-primary"
+         href="#"
+         style="background:#173f63;color:white;">
+        View Google Scholar
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONTACT -->
+
+  <section id="contact">
+
+    <div class="container">
+
+      <div class="contact-box">
+
+        <h2>
+          Let's connect
+        </h2>
+
+        <p>
+          I am interested in collaborations involving computational
+          electrochemistry, electrocatalysis, energy materials,
+          and next-generation electrochemical technologies.
+        </p>
+
+        <div class="contact-links">
+
+          <a href="mailto:your.email@example.com">
+            Email
+          </a>
+
+          <a href="https://github.com/yourusername" target="_blank">
+            GitHub
+          </a>
+
+          <a href="#" target="_blank">
+            Google Scholar
+          </a>
+
+          <a href="#" target="_blank">
+            ORCID
+          </a>
+
+          <a href="#" target="_blank">
+            LinkedIn
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <footer>
+    © 2026 Your Name · Computational Electrochemistry & Energy Materials
+  </footer>
+
+</body>
+
+</html>
+```
